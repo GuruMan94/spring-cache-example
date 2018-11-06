@@ -6,14 +6,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CacheService {
-
     private CacheManager cacheManager;
-    private CacheManager cacheManager2;
 
     @Autowired
-    public CacheService(CacheManager cacheManager, CacheManager cacheManager2) {
+    public CacheService(CacheManager cacheManager) {
         this.cacheManager = cacheManager;
-        this.cacheManager2 = cacheManager2;
     }
 
     public Integer getInteger(int value){
@@ -26,11 +23,11 @@ public class CacheService {
     }
 
     public Integer getIntegerFromCache2(int value){
-        return (Integer)cacheManager2.getCache("integerCache2").get(value).get();
+        return (Integer)cacheManager.getCache("integerCache2").get(value).get();
     }
 
     public int putIntegerInCache2(int value){
-        cacheManager2.getCache("integerCache2").put(value,value);
+        cacheManager.getCache("integerCache2").put(value,value);
         return value;
     }
 }
